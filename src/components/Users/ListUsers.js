@@ -9,7 +9,7 @@ const ListUsers = (props) => {
             {   props.list.length > 0 &&
                 props.list.map((item, idx) => {
                     return (
-                        <ListUsersItem name={item.name} age={item.age} key={idx} />
+                        <ListUsersItem name={item.name} age={item.age} key={item.id} />
                     )
                 })
             }

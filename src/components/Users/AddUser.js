@@ -1,5 +1,7 @@
 // General imports
 import React, { useState } from "react";
+import nextId from "react-id-generator";
+
 // UI components
 import Card from "../UI/Card";
 import Button from "../UI/Button";
@@ -16,9 +18,11 @@ const AddUser = (props) => {
         alert('Form is not valid')
         return
     }
+
     props.onAddUser({
       name: enteredName,
-      age: enteredAge
+      age: enteredAge,
+      id: nextId("user-id-")
     })
     setEnteredName('')
     setEnteredAge('')
@@ -43,7 +47,7 @@ const AddUser = (props) => {
         <input type="text" id="username" value={enteredName} onChange={nameChangedHandler} />
         <label htmlFor="age">How old is she/he?</label>
         <input type="number" id="age" value={enteredAge} onChange={ageChangedHandler} />
-        <div className={classes.info}>Greater than 0 smaller than 110</div>
+        <div className={classes.info}>Greater than 0 and smaller than 110</div>
         <Button type="submit">Send</Button>
       </form>
     </Card>
