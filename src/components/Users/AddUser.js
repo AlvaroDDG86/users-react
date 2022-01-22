@@ -33,7 +33,7 @@ const AddUser = (props) => {
   }
 
   const isFormValid = () => {
-    return (enteredName.trim().length > 0 && enteredAge.trim().length > 0) && +enteredAge > 0
+    return (enteredName.trim().length > 0 && enteredAge.trim().length > 0) && (+enteredAge > 0 && +enteredAge < 110)
   }
 
   return (
@@ -43,6 +43,7 @@ const AddUser = (props) => {
         <input type="text" id="username" value={enteredName} onChange={nameChangedHandler} />
         <label htmlFor="age">How old is she/he?</label>
         <input type="number" id="age" value={enteredAge} onChange={ageChangedHandler} />
+        <div className={classes.info}>Greater than 0 smaller than 110</div>
         <Button type="submit">Send</Button>
       </form>
     </Card>
