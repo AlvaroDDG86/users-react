@@ -16,9 +16,9 @@ const AddUser = (props) => {
         alert('Form is not valid')
         return
     }
-    console.log('Form', {
-        name: enteredName,
-        age: enteredAge
+    props.onAddUser({
+      name: enteredName,
+      age: enteredAge
     })
     setEnteredName('')
     setEnteredAge('')

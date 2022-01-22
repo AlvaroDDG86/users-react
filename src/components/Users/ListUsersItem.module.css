@@ -1,0 +1,14 @@
+.list-users-item {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-users-item__name {
+    font-size: 1.2em;
+    color: black;
+    font-weight: bold;
+    text-transform: capitalize;
+}
