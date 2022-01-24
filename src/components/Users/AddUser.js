@@ -6,6 +6,7 @@ import nextId from "react-id-generator";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Modal from "../UI/Modal";
+import Wrapper from "../Helpers/Wrapper";
 
 // own component classes
 import classes from "./AddUser.module.css";
@@ -56,7 +57,7 @@ const AddUser = (props) => {
   };
 
   return (
-    <>
+    <Wrapper>
       {!!error && <Modal title={error.title} message={error.message} onClose={closeHandler} />}
       <Card className={classes.input}>
         <form onSubmit={addUserHandler}>
@@ -80,7 +81,7 @@ const AddUser = (props) => {
           <Button type="submit">Send</Button>
         </form>
       </Card>
-    </>
+    </Wrapper>
   );
 };
 

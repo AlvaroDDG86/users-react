@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AddUser from './components/Users/AddUser';
 import ListUsers from './components/Users/ListUsers';
 
+import Wrapper from './components/Helpers/Wrapper';
 function App() {
   const [ listUsers, setListUsers ] = useState([])
   const addUsersHandler = (item) => {
@@ -10,10 +11,10 @@ function App() {
     })
   }
   return (
-    <div>
+    <Wrapper>
       <AddUser onAddUser={addUsersHandler} />
       <ListUsers list={ listUsers }/>
-    </div>
+    </Wrapper>
   );
 }
 
