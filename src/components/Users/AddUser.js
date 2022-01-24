@@ -1,5 +1,5 @@
 // General imports
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import nextId from "react-id-generator";
 
 // UI components
@@ -12,13 +12,16 @@ import Wrapper from "../Helpers/Wrapper";
 import classes from "./AddUser.module.css";
 
 const AddUser = (props) => {
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredAge, setEnteredAge] = useState("");
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
   const [error, setError] = useState();
 
   const addUserHandler = (event) => {
     event.preventDefault();
-    if (!isFormValid()) {
+    const name = nameInputRef.current.value;
+    const age = ageInputRef.current.value;
+    if (!isFormValid(name, age)) {
       setError({
         title: "Validations",
         message: "The form is not valid (name is required and age must be in range)",
@@ -27,34 +30,30 @@ const AddUser = (props) => {
     }
 
     props.onAddUser({
-      name: enteredName,
-      age: enteredAge,
+      name,
+      age,
       id: nextId("user-id-"),
     });
-    setEnteredName("");
-    setEnteredAge("");
-  };
-
-  const nameChangedHandler = (event) => {
-    setEnteredName(event.target.value);
-  };
-
-  const ageChangedHandler = (event) => {
-    setEnteredAge(event.target.value);
+    resetForm()
   };
 
   const closeHandler = () => {
     setError(null)
   }
 
-  const isFormValid = () => {
+  const isFormValid = (name, age) => {
     return (
-      enteredName.trim().length > 0 &&
-      enteredAge.trim().length > 0 &&
-      +enteredAge > 0 &&
-      +enteredAge < 110
+      name.trim().length > 0 &&
+      age.trim().length > 0 &&
+      +age > 0 &&
+      +age < 110
     );
   };
+
+  const resetForm = () => {
+    nameInputRef.current.value = ''
+    ageInputRef.current.value = ''
+  }
 
   return (
     <Wrapper>
@@ -65,19 +64,18 @@ const AddUser = (props) => {
           <input
             type="text"
             id="username"
-            value={enteredName}
-            onChange={nameChangedHandler}
+            ref={nameInputRef}
           />
           <label htmlFor="age">How old is she/he?</label>
           <input
             type="number"
             id="age"
-            value={enteredAge}
-            onChange={ageChangedHandler}
+            ref={ageInputRef}
           />
           <div className={classes.info}>
             Greater than 0 and smaller than 110
           </div>
+          <Button type="button" onClick={resetForm}>Clear</Button>
           <Button type="submit">Send</Button>
         </form>
       </Card>
